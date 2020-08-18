@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayocode | Powered by Ayoboga</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.9/ace.js"></script>
+    <link rel="shortcut icon"
+        href="https://64.media.tumblr.com/bc95cfa5ab29b1bbf6474456aae24e28/7040187b7d4ccdc2-45/s540x810/01b0a14fdf5243b2334b1a76672d6d88c35653d2.png"
+        type="image/x-icon">
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        #editor {
+            height: 100%;
+            width: 50%;
+            display: inline-block;
+        }
+
+        #container {
+            height: 75%;
+            width: auto;
+            white-space: nowrap;
+            overflow: hidden;
+            position: relative;
+            border: 5px solid black;
+        }
+
+        #iframe {
+            height: 100%;
+            display: inline-block;
+            width: 50%;
+        }
+
+        /* disable tag matching */
+        .ace_editor .ace_marker-layer .ace_bracket {
+            display: none
+        }
+    </style>
+</head>
+
+<body onload="ready()">
+    <div class="text-center mb-3">
+        <h1>Ayocode By Ayoboga</h1>
+        <h6>The Simple TextEditor for Web Programming</h6>
+
+    </div>
+
+    <div id='container' class="m-3">
+        <div id="editor">
+        </div>
+
+        <iframe id='iframe' frameBorder="0">
+        </iframe>
+
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-xl-6 text-center">
+            <h2>© 2019 - 2020 Ayoboga. All Rights Reserved</h2>
+            <h6>Ayoboga adalah website pembelajaran online tentang jasa boga, Bahasa Indonesia.
+                Tetap Belajar Masak untuk Investasi Di masa depan~!</h6><br>
+            <p>Dibuat dengan [ ❤ ] di Bandung, Indonesia</p>
+        </div>
+    </div>
+    <script>
+        function update() {
+            var idoc = document.getElementById('iframe').contentWindow.document;
+
+            idoc.open();
+            idoc.write(editor.getValue());
+            idoc.close();
+        }
+
+        function setupEditor() {
+            window.editor = ace.edit("editor");
+            editor.setTheme("ace/theme/monokai");
+            editor.getSession().setMode("ace/mode/html");
+            editor.setValue(`<!DOCTYPE html>
+<html>
+<head>
+</head>
+
+<body>
+</body>
+
+</html>`, 1); //1 = moves cursor to end
+
+            editor.getSession().on('change', function () {
+                update();
+            });
+
+            editor.focus();
+
+
+            editor.setOptions({
+                fontSize: "16pt",
+                showLineNumbers: false,
+                showGutter: false,
+                vScrollBarAlwaysVisible: true,
+                enableBasicAutocompletion: false, enableLiveAutocompletion: false
+            });
+
+            editor.setShowPrintMargin(false);
+            editor.setBehavioursEnabled(false);
+        }
+
+        function ready() {
+            setupEditor();
+            update();
+        }
+
+    </script>
+
+</body>
+
+</html>
